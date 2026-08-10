@@ -1,0 +1,43 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Lailara LLC — Trade-Spend Diagnostic warehouse config (DEMO)
+#
+# The reference client-warehouse connection. Every table and column name lives
+# HERE, not in warehouse_adapter.py — point the diagnostic at a different
+# warehouse by editing this block. `demo: true` so the deploy guard ignores it.
+# ─────────────────────────────────────────────────────────────────────────────
+
+client:
+  name: "Cinderhaven Provisions (demo)"
+
+engagement:
+  id: "CINDERHAVEN-DEMO"
+
+as_of_date: "2025-12-27"
+
+prepared_by: "Lailara LLC"
+
+demo: true
+
+basis:
+  week_convention: "week_ending_saturday"
+  scan_basis: "retail_scan"
+
+# ── Warehouse connection + schema map ────────────────────────────────────────
+warehouse:
+  kind: "sqlite"                                        # any DB-API 2.0 source works the same way
+  path: "cinderhaven-data/data/cinderhaven_product_master.db"
+  tables:
+    scans: "scan_data"
+    deductions: "deductions"
+  columns:
+    scans:
+      store_id: "store_id"
+      sku: "sku"
+      week_ending: "week_ending"
+      units_sold: "units_sold"
+      dollars_sold: "dollars_sold"
+    deductions:
+      deduction_id: "deduction_id"
+      deduction_type: "deduction_type"
+      amount: "amount"
+      deduction_date: "deduction_date"
