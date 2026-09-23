@@ -107,3 +107,13 @@ and live on GitHub. See arc history below and HANDOFF.md for details.
 - **Key decisions:** Two-bucket framing (structural trade + operational
   waste), original brief numbers superseded by verified actuals,
   cinderhaven-data is single source of truth via submodule.
+
+---
+
+## Improvement History
+
+### 2026-09-23 — Audit (health check only)
+- **Findings:** 1 critical, 5 important, 5 nice-to-have
+- **Top concerns:** Structural trade is understated ~$199K (~0.6pp): workbook/queries.py maps Kroger ($6.6M revenue) to the 7% regional rate even though sku_costs.trade_spend_pct_kroger (10%) exists, which fully explains the "methodology scope" gap vs canonical 9.83%, and the regression test pins the understated value. Branch client-mode-2026-08 carries 12 commits unmerged to main (warehouse adapter + CI) that HANDOFF/PLAN never recorded. scripts/extract_from_postgres.py never uses POSTGRES_PASSWORD (URL has a literal REDACTED placeholder), and warehouse_adapter.py sums 365 days of waste against a shorter revenue window when <52 weeks of scans exist.
+- **Action taken:** Audit only — no fixes this session
+- **Next review:** 2026-12-22
