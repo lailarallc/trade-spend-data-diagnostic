@@ -2,7 +2,7 @@
 
 Usage:
     flyctl proxy 5432 -a cinderhaven-db  # in another terminal
-    python scripts/extract_from_postgres.py
+    ALLOW_PROD_DB=1 python scripts/extract_from_postgres.py
 """
 import os
 import sqlite3
@@ -11,6 +11,8 @@ from decimal import Decimal
 from pathlib import Path
 
 import psycopg2
+
+import prod_guard  # vendored in scripts/; refuses a fly tunnel to production
 
 _pw = os.environ.get("POSTGRES_PASSWORD")
 if not _pw:
@@ -46,6 +48,7 @@ TABLE_MAP = {
 
 
 def extract():
+    prod_guard.check(DB_URL)
     pg = psycopg2.connect(DB_URL)
     pg.set_session(readonly=True)
     pg_cur = pg.cursor()
