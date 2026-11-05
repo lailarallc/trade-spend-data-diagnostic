@@ -62,11 +62,11 @@ and Regional Group use the regional average (7.0%).
 **The known divergence:** the diagnostic computes this number twice.
 The workbook (`workbook/queries.py`, feeding Tabs 1 and 4) uses the
 mapping above and gets **$2,992,224 (9.2%)**. The pure-SQL variant
-(`sql/trade_rate/structural_trade_amount.sql`) maps Sprouts to the
+(`sql/trade_rate/structural_trade_amount.sql`) maps the regional natural grocer to the
 regional rate instead of its dedicated column and gets **$2,914,207
-(9.0%)**. The entire difference is Sprouts: $3,900,857 of channel
+(9.0%)**. The entire difference is the regional natural grocer: $3,900,857 of channel
 revenue times two rate points is $78,017. The memo uses the workbook
-figure because Sprouts has a negotiated rate of its own in
+figure because the regional natural grocer has a negotiated rate of its own in
 `sku_costs`, and averaging a $3.9M channel into "regional" would
 understate a known contract. Both figures are computed, both are
 disclosed in the query headers, and neither is hand-entered anywhere.

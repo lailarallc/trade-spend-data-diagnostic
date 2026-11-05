@@ -19,8 +19,8 @@ company, not a client, and not any real company's data — every row
 is generated. The scenario: a brand doing $32.3M in trailing-52-week
 scan revenue across 50 SKUs in five product lines (Artisan Sauces,
 Pantry Staples, Specialty Condiments, Dried Goods, Snack Bites),
-selling through six retailers — Walmart, Costco, Whole Foods,
-Sprouts, Kroger, and a regional group — across 640 doors. The cost
+selling through six retailers — a national mass retailer, a club retailer, a natural grocer,
+a regional natural grocer, a conventional grocer, and a regional group — across 640 doors. The cost
 table also carries rate-card columns for UNFI, KeHE, and DTC, but
 the scan and deduction history covers the six retailers.
 

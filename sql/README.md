@@ -161,7 +161,7 @@ boundary effects.
 | Metric | Locked value | Query to check |
 |--------|-------------|----------------|
 | Trailing-52w scan revenue | $32,323,140 | total_revenue.sql |
-| Structural trade | ~$2,977,954 (9.2%) | structural_trade_amount.sql (see header caution on the Sprouts rate) |
+| Structural trade | ~$2,977,954 (9.2%) | structural_trade_amount.sql (see header caution on the regional natural grocer rate) |
 | Operational waste | ~$343,281 (1.1%) | waste_by_category.sql |
 | All-in trade cost | ~$3,335,505 (10.3%) | all_in_trade_rate.sql |
 | Largest waste category | spoilage, $53,664 (15.6% of waste) | waste_by_category.sql |

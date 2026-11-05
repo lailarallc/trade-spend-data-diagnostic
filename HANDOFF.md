@@ -74,7 +74,7 @@ For things that didn't work, see FAILURES.md.
 **Did:**
 - Exported all 30 raw tables from Fly.io Postgres to fresh SQLite (977K scan, 13.5K deductions, 6.1K disputes, plus 9 new tables: Shopify orders/lines/chargebacks/refunds/transactions/payouts, distributors, sku_distributors, retailer_requirements)
 - Added KeHE to all channel rate mappings (trade_spend_pct_kehe, wholesale_kehe) in tab_executive_pulse.py, tab_retailer_risk.py, and 4 SQL files
-- Removed KeHE "deduction-only" special case from tab_retailer_risk.py — KeHE now has $2.6M trailing-52w revenue
+- Removed distributor B "deduction-only" special case from tab_retailer_risk.py — distributor B now has $2.6M trailing-52w revenue
 - Re-locked all numbers across 15+ files:
   - Revenue: $27,483,467 (was $25.6M)
   - Structural: $5,207,524 / 18.9% (was $4.4M / 17.3%)
@@ -262,7 +262,7 @@ Risk, Deduction Ledger, Deduction Code Crosswalk, Methodology & Logic),
 workbook-level features (8 named ranges, print areas, data validation,
 conditional formatting), and validation script (43 checks, all passing).
 Key findings surfaced during build: 137 ghost promo deductions ($95,826),
-292 unmapped deduction codes, 11-retailer P&L including KeHE deduction-only
+292 unmapped deduction codes, 11-retailer P&L including distributor B deduction-only
 and DTC zero-trade benchmark.
 
 **State:** Arc 2 complete. `python build_workbook.py` produces workbook
