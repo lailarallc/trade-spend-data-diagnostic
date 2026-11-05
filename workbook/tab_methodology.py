@@ -262,8 +262,9 @@ def build_methodology(ws: Worksheet, db_path: Path) -> None:
         "Gross margin − structural trade rate. The structural rate is the average "
         "trade_spend_pct for that channel from sku_costs.")
     row = _write_pair(ws, row, "Net-net effective margin",
-        "After-structural margin − (operational deductions + promo billback) / revenue. "
-        "This is the true margin after all trade costs are accounted for.")
+        "After-structural margin − operational deductions / revenue (all-in trade = structural "
+        "trade + operational waste, matching the Executive Pulse). Promo billback is shown as its "
+        "own column on Retailer Risk and is not part of all-in trade.")
     row = _write_pair(ws, row, "Exclusions",
         "Freight, warehousing, and non-trade SG&A are not included. This is trade margin only, "
         "not net income margin.")

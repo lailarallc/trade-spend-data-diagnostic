@@ -91,7 +91,9 @@ def _query_retailer_data(db_path: Path) -> dict:
         op_ded = op_ded_map.get(retailer_name, 0)
         pb_ded = pb_map.get(retailer_name, 0)
 
-        all_in = structural + op_ded + pb_ded
+        # Canon (CINDERHAVEN_CANONICAL.md): all-in = structural + operational waste,
+        # excluding promo_billback. Promo BB stays visible as its own column.
+        all_in = structural + op_ded
         all_in_rate = all_in / rev if rev else 0
 
         gm_key = retailer_name if retailer_name in gm_map else "Regional"

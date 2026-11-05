@@ -101,3 +101,17 @@ def test_methodology_gm_example_matches_retailer_risk(wb):
     assert set(quoted) == {"national mass retailer", "dtc"}, quoted
     for name, pct in quoted.items():
         assert pct == pytest.approx(round(sheet[name], 3), abs=1e-9), (name, pct, sheet[name])
+
+
+@needs_workbook
+def test_all_in_total_matches_executive_pulse(wb):
+    """Canon: all-in trade = structural + operational waste, excluding
+    promo_billback. Retailer Risk once summed Promo BB into all-in."""
+    ws = wb["Retailer Risk"]
+    rows = range(6, 6 + len(_pnl_rows(ws)))
+    all_in_total = sum(ws.cell(row=r, column=10).value for r in rows)
+    pulse = wb["Executive Pulse"]
+    assert all_in_total == pytest.approx(pulse["D12"].value + pulse["D13"].value, abs=0.01)
+    for r in rows:
+        structural, op, all_in = (ws.cell(row=r, column=c).value for c in (5, 7, 10))
+        assert all_in == pytest.approx(structural + op, abs=0.01), ws.cell(row=r, column=2).value
