@@ -39,3 +39,23 @@ def fetch_channel_rates(conn: sqlite3.Connection) -> tuple[dict[str, float], flo
         "SELECT AVG(trade_spend_pct_regional) FROM sku_costs"
     ).fetchone()[0] or 0.0
     return rates, regional_rate
+
+
+def fetch_gross_margins(conn: sqlite3.Connection) -> dict[str, float]:
+    """Return gross margin by channel: (AVG(wholesale) - AVG(COGS)) / AVG(wholesale).
+
+    Single source for Retailer Risk and the Methodology example.
+    """
+    gm_map: dict[str, float] = {}
+    for channel, wcol in [("Walmart", "wholesale_walmart"), ("Costco", "wholesale_costco"),
+                          ("Whole Foods", "wholesale_whole_foods"),
+                          ("Sprouts", "wholesale_sprouts"), ("UNFI", "wholesale_unfi"),
+                          ("DTC", "wholesale_dtc"), ("KeHE", "wholesale_kehe"),
+                          ("Regional", "wholesale_regional")]:
+        # Kroger has no dedicated wholesale column; uses regional rate
+        r = conn.execute(f"SELECT AVG(cogs_per_unit), AVG({wcol}) FROM sku_costs").fetchone()
+        if r[0] is not None and r[1]:
+            gm_map[channel] = (r[1] - r[0]) / r[1]
+        else:
+            gm_map[channel] = 0
+    return gm_map

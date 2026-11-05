@@ -16,6 +16,7 @@ from openpyxl.worksheet.worksheet import Worksheet
 from workbook.queries import (
     CHANNEL_RATE_COLS,
     fetch_channel_rates,
+    fetch_gross_margins,
     get_trailing_bounds,
 )
 from workbook.labels import display_name
@@ -56,18 +57,7 @@ def _query_retailer_data(db_path: Path) -> dict:
 
         rates, regional_rate = fetch_channel_rates(conn)
 
-        gm_map: dict[str, float] = {}
-        for channel, wcol in [("Walmart", "wholesale_walmart"), ("Costco", "wholesale_costco"),
-                              ("Whole Foods", "wholesale_whole_foods"),
-                              ("Sprouts", "wholesale_sprouts"), ("UNFI", "wholesale_unfi"),
-                              ("DTC", "wholesale_dtc"), ("KeHE", "wholesale_kehe"),
-                              ("Regional", "wholesale_regional")]:
-            # Kroger has no dedicated wholesale column; uses regional rate
-            r = conn.execute(f"SELECT AVG(cogs_per_unit), AVG({wcol}) FROM sku_costs").fetchone()
-            if r[0] is not None and r[1]:
-                gm_map[channel] = (r[1] - r[0]) / r[1]
-            else:
-                gm_map[channel] = 0
+        gm_map = fetch_gross_margins(conn)
 
         op_ded_rows = conn.execute("""
             SELECT r.name, SUM(d.amount)

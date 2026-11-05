@@ -9,7 +9,8 @@ from pathlib import Path
 from openpyxl.styles import Alignment, Font
 from openpyxl.worksheet.worksheet import Worksheet
 
-from workbook.queries import fetch_channel_rates, get_trailing_bounds
+from workbook.labels import display_name
+from workbook.queries import fetch_channel_rates, fetch_gross_margins, get_trailing_bounds
 from workbook.styles import FONT_BODY, FONT_HEADER, FONT_SECTION, FONT_SMALL, LONDON_20, SANS
 
 _LABEL_FONT = Font(name=SANS, size=11, bold=True, color=LONDON_20)
@@ -102,6 +103,7 @@ def _query_methodology_numbers(db_path: Path) -> dict:
         ).fetchone()[0]
 
         db_size_mb = os.path.getsize(db_path) / (1024 * 1024)
+        gross_margins = fetch_gross_margins(conn)
 
     all_in = structural + waste
     return {
@@ -131,6 +133,8 @@ def _query_methodology_numbers(db_path: Path) -> dict:
         "scan_weeks": scan_range[2],
         "table_count": table_count,
         "db_size_mb": db_size_mb,
+        "gm_walmart": gross_margins["Walmart"],
+        "gm_dtc": gross_margins["DTC"],
     }
 
 
@@ -252,7 +256,8 @@ def build_methodology(ws: Worksheet, db_path: Path) -> None:
     row += 1
     row = _write_pair(ws, row, "Gross margin",
         "( Wholesale price − COGS ) / Wholesale price. Uses channel-specific wholesale prices "
-        "from sku_costs, averaged across all SKUs. Example: national mass retailer GM = 39.0%, DTC GM = 62.5%.")
+        "from sku_costs, averaged across all SKUs. "
+        f"Example: {display_name('Walmart').lower()} GM = {n['gm_walmart']:.1%}, DTC GM = {n['gm_dtc']:.1%}.")
     row = _write_pair(ws, row, "After structural trade",
         "Gross margin − structural trade rate. The structural rate is the average "
         "trade_spend_pct for that channel from sku_costs.")

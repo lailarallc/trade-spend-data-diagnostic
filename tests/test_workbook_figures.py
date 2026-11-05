@@ -83,3 +83,21 @@ def test_deductions_reconcile_to_canon_cy2025(wb):
                                      "2025-12-31", op)
             cy2025 = tab4 - in_window_2024 + after_window_2025
             assert cy2025 == pytest.approx(canon[key]["cy2025"], abs=0.01), key
+
+
+@needs_workbook
+def test_methodology_gm_example_matches_retailer_risk(wb):
+    """The Methodology GM example once hardcoded 39.0% / 62.5% while Retailer
+    Risk computed 51.9% / 75.9%. Both now read fetch_gross_margins()."""
+    import re
+
+    text = next(v for row in wb["Methodology & Logic"].iter_rows(values_only=True)
+                for v in row if isinstance(v, str) and "GM =" in v)
+    quoted = {name.strip().lower(): float(pct) / 100
+              for name, pct in re.findall(r"([A-Za-z ]+?) GM = ([\d.]+)%", text)}
+    ws = wb["Retailer Risk"]
+    sheet = {ws.cell(row=r, column=COL_NAME).value.lower(): ws.cell(row=r, column=12).value
+             for r in range(6, 6 + len(_pnl_rows(ws)))}
+    assert set(quoted) == {"national mass retailer", "dtc"}, quoted
+    for name, pct in quoted.items():
+        assert pct == pytest.approx(round(sheet[name], 3), abs=1e-9), (name, pct, sheet[name])
