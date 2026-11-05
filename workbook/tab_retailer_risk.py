@@ -17,7 +17,6 @@ from workbook.queries import (
     CHANNEL_RATE_COLS,
     fetch_channel_rates,
     get_trailing_bounds,
-    retailer_key,
 )
 from workbook.labels import display_name
 from workbook.styles import (
@@ -71,20 +70,20 @@ def _query_retailer_data(db_path: Path) -> dict:
                 gm_map[channel] = 0
 
         op_ded_rows = conn.execute("""
-            SELECT retailer_id, SUM(amount)
-            FROM deductions
-            WHERE deduction_date > date(?, '-365 days') AND deduction_date <= ?
-              AND deduction_type != 'promo_billback'
-            GROUP BY retailer_id
+            SELECT r.name, SUM(d.amount)
+            FROM deductions d JOIN retailers r ON d.retailer_id = r.retailer_id
+            WHERE d.deduction_date > date(?, '-365 days') AND d.deduction_date <= ?
+              AND d.deduction_type != 'promo_billback'
+            GROUP BY r.name
         """, (max_scan, max_scan)).fetchall()
         op_ded_map = dict(op_ded_rows)
 
         pb_rows = conn.execute("""
-            SELECT retailer_id, SUM(amount)
-            FROM deductions
-            WHERE deduction_date > date(?, '-365 days') AND deduction_date <= ?
-              AND deduction_type = 'promo_billback'
-            GROUP BY retailer_id
+            SELECT r.name, SUM(d.amount)
+            FROM deductions d JOIN retailers r ON d.retailer_id = r.retailer_id
+            WHERE d.deduction_date > date(?, '-365 days') AND d.deduction_date <= ?
+              AND d.deduction_type = 'promo_billback'
+            GROUP BY r.name
         """, (max_scan, max_scan)).fetchall()
         pb_map = dict(pb_rows)
 
@@ -97,9 +96,10 @@ def _query_retailer_data(db_path: Path) -> dict:
         rate = rates.get(retailer_name, regional_rate)
         structural = rev * rate
 
-        rkey = retailer_key(retailer_name)
-        op_ded = op_ded_map.get(rkey, 0)
-        pb_ded = pb_map.get(rkey, 0)
+        # deductions carry retailer_id (RET-WALMART); the query maps it to the
+        # retailers.name used by scan_data, so both sides key on the same name.
+        op_ded = op_ded_map.get(retailer_name, 0)
+        pb_ded = pb_map.get(retailer_name, 0)
 
         all_in = structural + op_ded + pb_ded
         all_in_rate = all_in / rev if rev else 0

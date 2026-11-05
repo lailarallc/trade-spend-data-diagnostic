@@ -39,8 +39,3 @@ def fetch_channel_rates(conn: sqlite3.Connection) -> tuple[dict[str, float], flo
         "SELECT AVG(trade_spend_pct_regional) FROM sku_costs"
     ).fetchone()[0] or 0.0
     return rates, regional_rate
-
-
-def retailer_key(name: str) -> str:
-    """Normalize retailer name to lowercase_underscore key."""
-    return name.lower().replace(" ", "_")
