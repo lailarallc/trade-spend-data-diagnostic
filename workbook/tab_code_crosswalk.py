@@ -10,6 +10,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.table import Table
 from openpyxl.worksheet.worksheet import Worksheet
 
+from workbook.labels import display_name
 from workbook.styles import (
     ALIGN_CENTER,
     FILL_GOOD,
@@ -45,7 +46,8 @@ def _query_crosswalk(db_path: Path) -> list[tuple]:
 
 
 def build_code_crosswalk(ws: Worksheet, db_path: Path) -> None:
-    rows = _query_crosswalk(db_path)
+    # Sort by public label, not retailer_id, so the real names' order does not leak.
+    rows = sorted(_query_crosswalk(db_path), key=lambda r: (display_name(r[0]), r[3], r[1]))
 
     ws.sheet_view.showGridLines = False
 
@@ -78,7 +80,7 @@ def build_code_crosswalk(ws: Worksheet, db_path: Path) -> None:
         rw = header_row + 1 + i
         retailer, code, name, category, status = row_data
 
-        ws.cell(row=rw, column=1, value=retailer.replace("_", " ").title())
+        ws.cell(row=rw, column=1, value=display_name(retailer))
         c_code = ws.cell(row=rw, column=2, value=code)
         c_code.alignment = ALIGN_CENTER
         ws.cell(row=rw, column=3, value=name)

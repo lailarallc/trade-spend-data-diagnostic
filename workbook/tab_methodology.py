@@ -252,7 +252,7 @@ def build_methodology(ws: Worksheet, db_path: Path) -> None:
     row += 1
     row = _write_pair(ws, row, "Gross margin",
         "( Wholesale price − COGS ) / Wholesale price. Uses channel-specific wholesale prices "
-        "from sku_costs, averaged across all SKUs. Example: Walmart GM = 39.0%, DTC GM = 62.5%.")
+        "from sku_costs, averaged across all SKUs. Example: national mass retailer GM = 39.0%, DTC GM = 62.5%.")
     row = _write_pair(ws, row, "After structural trade",
         "Gross margin − structural trade rate. The structural rate is the average "
         "trade_spend_pct for that channel from sku_costs.")

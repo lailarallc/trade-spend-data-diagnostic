@@ -222,6 +222,29 @@ off-invoice, $4.5M total trade, 42/38/20 category split.~~
 - **Do not:** Add openpyxl chart objects back. The one visual element
   is the in-cell data bar waterfall on Tab 1.
 
+### 2026-11-05: Workbook cells show trade-partner labels, not real names
+- **Decision:** Write every retailer/distributor name or ID into a cell
+  through `workbook/labels.py`, which reads the vendored
+  `reference/retailer_display_labels.json`.
+- **Why:** Owner rule 2026-11-05 (lailara-website DECISIONS): a
+  Cinderhaven dollar figure never shares a row with a real partner name.
+  The workbook is served publicly at `/tools/trade-spend-diagnostic.xlsx`
+  and failed the gate with 128 violations. The Code Crosswalk tab carries
+  no dollar figures, but its synthetic codes join 1:1 to the Ledger rows,
+  so a real name there would de-anonymize every ledger dollar; it is
+  relabeled too and sorted by label so the real names' order does not
+  leak. `RET-REGIONAL` displays as "Regional Group" (label equals name).
+  Queries, IDs, data keys and computations keep the real names.
+- **Scope:** Every cell that shows a partner: Retailer Risk (P&L,
+  concentration, what-if tables), Promo Efficacy (promo table, ghost
+  promos), Leak Diagnostic (double-dip alert), Deduction Ledger (Retailer
+  and Remittance Desc columns), Deduction Code Crosswalk (Retailer column
+  and sort), Methodology (GM example sentence).
+- **Do not:** Write `retailer`, `retailer_id`, `r["name"]`, or a
+  hardcoded partner name into a cell, comment, sheet title, or table
+  without `display_name()` / `relabel_text()`. Gate the dumped workbook
+  with `scripts/check_retailer_labels.py` before publishing.
+
 ---
 
 ## Writing & Voice

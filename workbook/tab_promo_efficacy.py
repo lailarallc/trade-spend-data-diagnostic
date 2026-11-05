@@ -14,6 +14,7 @@ from openpyxl.worksheet.datavalidation import DataValidation
 from openpyxl.worksheet.table import Table
 from openpyxl.worksheet.worksheet import Worksheet
 
+from workbook.labels import display_name
 from workbook.queries import get_trailing_bounds
 from workbook.styles import (
     ALIGN_CENTER,
@@ -303,7 +304,7 @@ def build_promo_efficacy(ws: Worksheet, db_path: Path) -> None:
         row = table_header_row + 1 + i
 
         ws.cell(row=row, column=2, value=promo["promo_id"])
-        ws.cell(row=row, column=3, value=promo["retailer"])
+        ws.cell(row=row, column=3, value=display_name(promo["retailer"]))
         ws.cell(row=row, column=4, value=promo["sku"])
         ws.cell(row=row, column=5, value=promo["promo_type"])
         ws.cell(row=row, column=6, value=promo["start_week"])
@@ -430,7 +431,7 @@ def build_promo_efficacy(ws: Worksheet, db_path: Path) -> None:
     for i, (ded_id, retailer, amount, ded_date) in enumerate(data["ghosts"]):
         r = ghost_row + 1 + i
         ws.cell(row=r, column=2, value=ded_id)
-        ws.cell(row=r, column=3, value=retailer.replace("_", " ").title())
+        ws.cell(row=r, column=3, value=display_name(retailer))
         c_a = ws.cell(row=r, column=4, value=amount)
         c_a.number_format = NUM_FMT_DOLLAR
         c_a.alignment = ALIGN_RIGHT

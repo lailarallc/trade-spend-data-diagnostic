@@ -13,6 +13,7 @@ from openpyxl.worksheet.datavalidation import DataValidation
 from openpyxl.worksheet.table import Table
 from openpyxl.worksheet.worksheet import Worksheet
 
+from workbook.labels import display_name
 from workbook.queries import get_trailing_bounds
 from workbook.styles import (
     ALIGN_CENTER,
@@ -196,7 +197,7 @@ def build_leak_diagnostic(ws: Worksheet, db_path: Path) -> None:
             "deduction, resulting in Cinderhaven paying twice for the same promotion.",
             "System", width=300, height=100,
         )
-        ws.cell(row=r, column=3, value=retailer.replace("_", " ").title())
+        ws.cell(row=r, column=3, value=display_name(retailer))
         c_a = ws.cell(row=r, column=4, value=amount)
         c_a.number_format = NUM_FMT_DOLLAR
         c_a.alignment = ALIGN_RIGHT

@@ -19,6 +19,7 @@ from workbook.queries import (
     get_trailing_bounds,
     retailer_key,
 )
+from workbook.labels import display_name
 from workbook.styles import (
     ALIGN_CENTER,
     ALIGN_RIGHT,
@@ -174,7 +175,7 @@ def build_retailer_risk(ws: Worksheet, db_path: Path) -> None:
     for i, r in enumerate(retailers):
         rw = table_start + i
 
-        ws.cell(row=rw, column=2, value=r["name"])
+        ws.cell(row=rw, column=2, value=display_name(r["name"]))
 
         c = ws.cell(row=rw, column=3, value=r["revenue"])
         c.number_format = NUM_FMT_DOLLAR
@@ -249,7 +250,7 @@ def build_retailer_risk(ws: Worksheet, db_path: Path) -> None:
 
     for i, r in enumerate(chart_retailers):
         rw = cr_header_row + 1 + i
-        ws.cell(row=rw, column=2, value=r["name"])
+        ws.cell(row=rw, column=2, value=display_name(r["name"]))
         ws.cell(row=rw, column=3, value=r["rev_share"]).number_format = NUM_FMT_PCT
         ws.cell(row=rw, column=4, value=r["ded_share"]).number_format = NUM_FMT_PCT
 
@@ -291,7 +292,7 @@ def build_retailer_risk(ws: Worksheet, db_path: Path) -> None:
     for i, r in enumerate(chart_retailers):
         rw = whatif_row + 1 + i
 
-        ws.cell(row=rw, column=2, value=r["name"])
+        ws.cell(row=rw, column=2, value=display_name(r["name"]))
 
         rev_cell = ws.cell(row=rw, column=3, value=r["revenue"])
         rev_cell.number_format = NUM_FMT_DOLLAR

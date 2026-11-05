@@ -10,6 +10,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.table import Table
 from openpyxl.worksheet.worksheet import Worksheet
 
+from workbook.labels import display_name, relabel_text
 from workbook.queries import get_trailing_bounds
 from workbook.styles import (
     ALIGN_CENTER,
@@ -131,6 +132,8 @@ def build_deduction_ledger(ws: Worksheet, db_path: Path) -> None:
 
         for c, val in enumerate(row_data, 1):
             ws.cell(row=rw, column=c, value=val)
+        ws.cell(row=rw, column=3, value=display_name(row_data[2]))
+        ws.cell(row=rw, column=11, value=relabel_text(row_data[10]))
 
         ws.cell(row=rw, column=7).number_format = NUM_FMT_DOLLAR
         ws.cell(row=rw, column=7).alignment = ALIGN_RIGHT
