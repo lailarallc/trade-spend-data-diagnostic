@@ -8,11 +8,12 @@ CHANNEL_RATE_COLS = {
     "Costco": "trade_spend_pct_costco",
     "Whole Foods": "trade_spend_pct_whole_foods",
     "Sprouts": "trade_spend_pct_sprouts",
+    "Kroger": "trade_spend_pct_kroger",
     "UNFI": "trade_spend_pct_unfi",
     "DTC": "trade_spend_pct_dtc",
     "KeHE": "trade_spend_pct_kehe",
 }
-# Kroger has no dedicated trade_spend_pct column; falls back to regional rate
+# Retailers not listed (Regional Group) use the regional rate
 
 _VALID_RATE_COLS = frozenset(CHANNEL_RATE_COLS.values()) | {"trade_spend_pct_regional"}
 

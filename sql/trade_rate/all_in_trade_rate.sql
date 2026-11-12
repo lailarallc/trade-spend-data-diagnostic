@@ -11,11 +11,9 @@
 --           trailing-365 window)
 -- Notes:    Gap query — was Python arithmetic combining three
 --           separate query results. Locked numbers: revenue
---           $32,323,140, structural $2,977,954 (9.2%), waste
---           $343,281 (1.1%), all-in 10.3%. Caution: the structural
---           CTE maps Sprouts to the regional rate (the workbook
---           uses trade_spend_pct_sprouts), so this query returns
---           slightly lower structural and all-in figures.
+--           $32,323,140, structural $3,177,051 (9.8%), waste
+--           $343,281 (1.1%), all-in 10.9%. The structural CTE uses
+--           the workbook's channel mapping, so the two agree.
 -- ============================================
 
 WITH revenue AS (
@@ -36,6 +34,8 @@ channel_rates AS (
         AVG(trade_spend_pct_walmart)     AS rate_walmart,
         AVG(trade_spend_pct_costco)      AS rate_costco,
         AVG(trade_spend_pct_whole_foods) AS rate_whole_foods,
+        AVG(trade_spend_pct_sprouts)     AS rate_sprouts,
+        AVG(trade_spend_pct_kroger)      AS rate_kroger,
         AVG(trade_spend_pct_unfi)        AS rate_unfi,
         AVG(trade_spend_pct_dtc)         AS rate_dtc,
         AVG(trade_spend_pct_kehe)        AS rate_kehe,
@@ -48,6 +48,8 @@ structural AS (
             WHEN 'Walmart'     THEN rates.rate_walmart
             WHEN 'Costco'      THEN rates.rate_costco
             WHEN 'Whole Foods' THEN rates.rate_whole_foods
+            WHEN 'Sprouts'     THEN rates.rate_sprouts
+            WHEN 'Kroger'      THEN rates.rate_kroger
             WHEN 'UNFI'        THEN rates.rate_unfi
             WHEN 'DTC'         THEN rates.rate_dtc
             WHEN 'KeHE'        THEN rates.rate_kehe

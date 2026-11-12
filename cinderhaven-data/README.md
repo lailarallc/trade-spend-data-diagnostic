@@ -72,12 +72,11 @@ third of the waste, and a promotion calendar that stops in November
 
 - Trailing-52-week scan revenue (2025-01-04 to 2025-12-27):
   **$32,323,139.62**
-- Structural trade: **$2,992,224 (9.2%)** by the workbook's
-  channel-average method; a pure-SQL channel-mapping variant gives
-  $2,914,207 (9.0%) — both derivations are documented in the
-  diagnostic's `DEFENSIBILITY.md`
+- Structural trade: **$3,177,051 (9.8%)** by the channel-average
+  method; the workbook and the pure-SQL variant agree, and the
+  derivation is documented in the diagnostic's `DEFENSIBILITY.md`
 - Operational waste (trailing 365 days, excluding promo billbacks):
-  **$343,281 across 4,772 events (1.1%)**; all-in trade **10.3%**
+  **$343,281 across 4,772 events (1.1%)**; all-in trade **10.9%**
 - Waste categories: 8, six of them clustered between $48,861 and
   $53,664; the largest is 15.6% of the total
 - Promo billbacks with no matching calendar promotion: **521 /

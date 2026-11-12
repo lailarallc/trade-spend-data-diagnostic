@@ -88,7 +88,7 @@ def main() -> bool:
                 f"Got ${revenue:,.0f}" if revenue else "Got None")
 
         structural = ws1["D12"].value
-        r.check("Structural trade ≈ $2,977,954", approx(structural, 2977954),
+        r.check("Structural trade ≈ $3,177,051", approx(structural, 3177051),
                 f"Got ${structural:,.0f}" if structural else "Got None")
 
         waste = ws1["D13"].value
@@ -96,13 +96,13 @@ def main() -> bool:
                 f"Got ${waste:,.0f}" if waste else "Got None")
 
         all_in_rate = ws1["B5"].value
-        r.check("All-in trade rate ≈ 10.3%",
-                approx(all_in_rate, 0.1027, 0.01),
+        r.check("All-in trade rate ≈ 10.9%",
+                approx(all_in_rate, 0.1089, 0.01),
                 f"Got {all_in_rate*100:.1f}%" if all_in_rate else "Got None")
 
         structural_rate = ws1["C5"].value
-        r.check("Structural trade rate ≈ 9.2%",
-                approx(structural_rate, 0.0921, 0.005),
+        r.check("Structural trade rate ≈ 9.8%",
+                approx(structural_rate, 0.0983, 0.005),
                 f"Got {structural_rate*100:.1f}%" if structural_rate else "Got None")
 
         waste_rate = ws1["D5"].value

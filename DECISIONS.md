@@ -176,6 +176,11 @@ off-invoice, $4.5M total trade, 42/38/20 category split.~~
 
 ---
 
+### 2026-11-11 — Kroger and Sprouts use their own trade-rate columns; structural trade equals canon
+- **Decision:** `CHANNEL_RATE_COLS` (workbook), the regression test's copy, and both SQL variants (`structural_trade_amount.sql`, `all_in_trade_rate.sql`) map Kroger to `trade_spend_pct_kroger` and Sprouts to `trade_spend_pct_sprouts`. Only Regional Group, which has no column, uses the regional rate. Structural trade is $3,177,051 (9.8%), equal to canonical `trade.structural_annual.trailing_52w` ($3,177,050.51). All-in is 10.9% ($3,520,331). Waste is unchanged at $343,281, so the 1.1-point finding is unchanged.
+- **Why:** The map predated the Kroger column, so Kroger ($6.6M of scan revenue) was billed at the 7.0% regional rate instead of its 10.0% contract, understating structural trade by $199,096. The repo printed three different structural figures ($2,992,224 / $2,977,954 / $2,914,207). DEFENSIBILITY already argued a retailer with its own negotiated rate should not be averaged into regional; that argument now applies to every such retailer. Closes lailara-website PLAN "P2 trade-spend figures: fix Kroger/Sprouts rate gap".
+- **Do not:** Add a retailer to `stores` without mapping its rate column in all four places (`workbook/queries.py`, `tests/test_canonical_regression.py`, both SQL files). Kroger gross margin still uses the regional wholesale column because `sku_costs` has no `wholesale_kroger`; that is a separate, open gap.
+
 ## Visualization
 
 ### 2026-05-10 — Automate DAX measure injection via pbi-tools, keep visual layout manual

@@ -2,8 +2,8 @@
 
 Cinderhaven Provisions, a specialty food company with $32.3 million
 in trailing-52-week scan revenue (CY2025), carries a structural trade rate
-of 9.2% (~$3.0M). All-in trade cost including operational
-deductions is 10.3%. The rate card is not the problem. The
+of 9.8% (~$3.2M). All-in trade cost including operational
+deductions is 10.9%. The rate card is not the problem. The
 1.1-point gap above it is: $343K per year in operational waste
 buried inside the deductions — spoilage and damage claims, pricing
 errors, pallet and label fines, short-ship charges — spread so
@@ -46,10 +46,10 @@ filing window closes.
 
 The waste is measurable, and the measurement is the point of this
 diagnostic. Cinderhaven's numbers are representative of the pattern:
-a 9.2% structural trade rate that everyone can see, and $343K per
+a 9.8% structural trade rate that everyone can see, and $343K per
 year in operational waste (1.1% of scan revenue) that did not
 appear in any report until the infrastructure to calculate it was
-built. The all-in trade cost is 10.3% — the 1.1-point delta above
+built. The all-in trade cost is 10.9% — the 1.1-point delta above
 the structural rate is not a rate problem, but a magnitude problem
 hiding in the noise.
 
@@ -121,10 +121,10 @@ diagnostic-level engagement.
 
 ### The headline
 
-Cinderhaven's structural trade rate is 9.2% of trailing-52-week
+Cinderhaven's structural trade rate is 9.8% of trailing-52-week
 retailer scan revenue ($32,323,139.62, CY2025 — verified against
-production 2026-07-29) — ~$3.0M in planned trade. The all-in trade
-cost, including operational deductions, is 10.3% ($3.34M). The
+production 2026-07-29) — ~$3.2M in planned trade. The all-in trade
+cost, including operational deductions, is 10.9% ($3.52M). The
 operational waste layer is $343K trailing-365-day, representing
 1.1% of scan revenue — the 1.1-point gap between the structural
 rate and the all-in rate (see Tab 1: Executive Pulse).
@@ -226,8 +226,8 @@ for a different user and a different moment.
 
 **The Excel workbook** (7 tabs) is the static diagnostic. It opens
 cold — no database connection, no setup. Tab 1 (Executive Pulse)
-leads with the waste-magnitude punchline: 9.2% structural,
-1.1% operational waste, $343K trailing-365, 10.3% all-in. Tabs 2 through 4
+leads with the waste-magnitude punchline: 9.8% structural,
+1.1% operational waste, $343K trailing-365, 10.9% all-in. Tabs 2 through 4
 (Leak Diagnostic, Promo Efficacy, Retailer Risk) provide the
 supporting detail with adjustable inputs — a target recovery rate,
 a promo comparison window, and per-retailer what-if trade rates.

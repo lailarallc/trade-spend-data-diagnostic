@@ -11,13 +11,11 @@
 --           pairing revenue_by_retailer results with channel
 --           trade rates. This query does it in pure SQL.
 --           Locked number (workbook): structural trade =
---           $2,977,954 (9.2% of revenue). Caution: this query maps
---           Sprouts to the regional rate; the workbook uses the
---           dedicated trade_spend_pct_sprouts column, so this query
---           returns a slightly lower total (~$2,914,207).
---           Channel mapping: Walmart, Costco, Whole Foods, UNFI,
---           DTC, KeHE each have their own rate column; all other
---           retailers use trade_spend_pct_regional.
+--           $3,177,051 (9.8% of revenue). Same channel mapping
+--           as the workbook, so both return the same total.
+--           Channel mapping: Walmart, Costco, Whole Foods, Sprouts,
+--           Kroger, UNFI, DTC, KeHE each have their own rate column;
+--           all other retailers use trade_spend_pct_regional.
 -- ============================================
 
 WITH channel_revenue AS (
@@ -33,6 +31,8 @@ channel_rates AS (
         AVG(trade_spend_pct_walmart)     AS rate_walmart,
         AVG(trade_spend_pct_costco)      AS rate_costco,
         AVG(trade_spend_pct_whole_foods) AS rate_whole_foods,
+        AVG(trade_spend_pct_sprouts)     AS rate_sprouts,
+        AVG(trade_spend_pct_kroger)      AS rate_kroger,
         AVG(trade_spend_pct_unfi)        AS rate_unfi,
         AVG(trade_spend_pct_dtc)         AS rate_dtc,
         AVG(trade_spend_pct_kehe)        AS rate_kehe,
@@ -46,6 +46,8 @@ SELECT
         WHEN 'Walmart'     THEN rates.rate_walmart
         WHEN 'Costco'      THEN rates.rate_costco
         WHEN 'Whole Foods' THEN rates.rate_whole_foods
+        WHEN 'Sprouts'     THEN rates.rate_sprouts
+        WHEN 'Kroger'      THEN rates.rate_kroger
         WHEN 'UNFI'        THEN rates.rate_unfi
         WHEN 'DTC'         THEN rates.rate_dtc
         WHEN 'KeHE'        THEN rates.rate_kehe
@@ -55,6 +57,8 @@ SELECT
         WHEN 'Walmart'     THEN rates.rate_walmart
         WHEN 'Costco'      THEN rates.rate_costco
         WHEN 'Whole Foods' THEN rates.rate_whole_foods
+        WHEN 'Sprouts'     THEN rates.rate_sprouts
+        WHEN 'Kroger'      THEN rates.rate_kroger
         WHEN 'UNFI'        THEN rates.rate_unfi
         WHEN 'DTC'         THEN rates.rate_dtc
         WHEN 'KeHE'        THEN rates.rate_kehe

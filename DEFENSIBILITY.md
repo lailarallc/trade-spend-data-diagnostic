@@ -41,11 +41,11 @@ year gets a yes with a one-week caveat, not a shrug.
 wholesale revenue. **The answer:** correct, and immaterial to the
 finding. Scan data is the only weekly, retailer-comparable series in
 the dataset, so it is the denominator for every rate in the
-diagnostic. The 9.2% structural rate and the 10.3% all-in rate are
+diagnostic. The 9.8% structural rate and the 10.9% all-in rate are
 computed against the same base; the 1.1-point gap between them — the
 finding — survives any consistent choice of denominator.
 
-## Structural trade: $2,992,224 (9.2%), computed two ways
+## Structural trade: $3,177,051 (9.8%), computed two ways
 
 Structural trade is the negotiated rate card applied to channel
 revenue: for each retailer, trailing-52-week scan revenue times the
@@ -55,32 +55,28 @@ negotiated at the channel level, so the channel average, not per-SKU
 rates, is the right resolution; per-SKU application would add false
 precision, not accuracy.
 
-The mapping in full: Walmart (12.0%), Costco (10.0%), Whole Foods
-(8.0%), and Sprouts (9.0%) use their dedicated rate columns; Kroger
-and Regional Group use the regional average (7.0%).
+The mapping in full: Walmart (12.0%), Costco (10.0%), Kroger (10.0%),
+Sprouts (9.0%), and Whole Foods (8.0%) use their dedicated rate
+columns; Regional Group, which has no column of its own, uses the
+regional average (7.0%).
 
-**The known divergence:** the diagnostic computes this number twice.
-The workbook (`workbook/queries.py`, feeding Tabs 1 and 4) uses the
-mapping above and gets **$2,992,224 (9.2%)**. The pure-SQL variant
-(`sql/trade_rate/structural_trade_amount.sql`) maps the regional natural grocer to the
-regional rate instead of its dedicated column and gets **$2,914,207
-(9.0%)**. The entire difference is the regional natural grocer: $3,900,857 of channel
-revenue times two rate points is $78,017. The memo uses the workbook
-figure because the regional natural grocer has a negotiated rate of its own in
-`sku_costs`, and averaging a $3.9M channel into "regional" would
-understate a known contract. Both figures are computed, both are
-disclosed in the query headers, and neither is hand-entered anywhere.
+**Computed twice, one answer:** the workbook (`workbook/queries.py`,
+feeding Tabs 1 and 4) and the pure-SQL variant
+(`sql/trade_rate/structural_trade_amount.sql`) use the same mapping
+and both return **$3,177,051 (9.8%)**, which equals canonical
+`trade.structural_annual.trailing_52w` to the dollar. Neither is
+hand-entered anywhere.
 
-**The residual attack:** `sku_costs` also carries a dedicated Kroger
-column (10.0% average) that neither variant uses — the workbook's
-channel map predates the column and keeps Kroger at the regional
-rate. Adopting it would add roughly $200K and put structural trade
-near 9.8%. **The answer:** the structural figure describes the
-budgeted side of the ledger, and any of these mappings leaves the
-finding intact, because the waste number does not depend on the rate
-mapping at all — it is summed directly from deduction line items. A
-different mapping would change the size of the known cost; it would
-not move $343,281 by a dollar.
+**What changed (2026-11-11):** until then the workbook kept Kroger at
+the regional rate (its channel map predated the Kroger column) and the
+SQL variant also kept Sprouts there, so the diagnostic printed
+$2,992,224, $2,977,954 and $2,914,207 in different files. A retailer
+with a negotiated rate of its own in `sku_costs` should not be averaged
+into "regional": that understates a known contract. Mapping Kroger to
+its own column added $199,096. The finding did not move: the waste
+number is summed directly from deduction line items and does not
+depend on the rate mapping, so it is $343,281 under either mapping,
+and the gap between structural and all-in is still 1.1 points.
 
 ## Operational waste: $343,281 across 4,772 events (1.1%)
 

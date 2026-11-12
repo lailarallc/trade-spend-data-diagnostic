@@ -111,8 +111,8 @@ For a new analyst walking through the diagnostic narrative:
 1. **trailing_52_weeks.sql** — establish the analysis window; note
    the oldest and newest dates for use as parameters in later queries
 2. **total_revenue.sql** — the revenue headline ($32.32M trailing-52w, CY2025)
-3. **all_in_trade_rate.sql** — the punchline: 9.2% structural +
-   1.1% waste = 10.3% all-in (the rate card is known and budgeted;
+3. **all_in_trade_rate.sql** — the punchline: 9.8% structural +
+   1.1% waste = 10.9% all-in (the rate card is known and budgeted;
    the waste magnitude is the story)
 4. **waste_by_category.sql** — where the 1.1% comes from (8 deduction
    types; six of them within $4,800 of each other, none above 16%
@@ -161,9 +161,9 @@ boundary effects.
 | Metric | Locked value | Query to check |
 |--------|-------------|----------------|
 | Trailing-52w scan revenue | $32,323,140 | total_revenue.sql |
-| Structural trade | ~$2,977,954 (9.2%) | structural_trade_amount.sql (see header caution on the regional natural grocer rate) |
+| Structural trade | ~$3,177,051 (9.8%) | structural_trade_amount.sql |
 | Operational waste | ~$343,281 (1.1%) | waste_by_category.sql |
-| All-in trade cost | ~$3,335,505 (10.3%) | all_in_trade_rate.sql |
+| All-in trade cost | ~$3,520,331 (10.9%) | all_in_trade_rate.sql |
 | Largest waste category | spoilage, $53,664 (15.6% of waste) | waste_by_category.sql |
 | Double-dip events | 0 | double_dip_events.sql |
 | Disputes filed | 5,247 | dispute_summary.sql |

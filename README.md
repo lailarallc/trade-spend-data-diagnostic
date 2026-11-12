@@ -1,27 +1,26 @@
 # Trade Spend Diagnostic — finding the $343K of operational waste hiding in Cinderhaven's deductions
 
 A trade spend diagnostic for a mid-market natural/specialty CPG company.
-Cinderhaven's structural trade rate (9.2% of retailer scan revenue, ~$3.0M on
+Cinderhaven's structural trade rate (9.8% of retailer scan revenue, ~$3.2M on
 $32,323,139.62 trailing-52-week — canonical `revenue.retail_scan.cy2025`,
 verified against production 2026-07-29) is the negotiated, budgeted cost of doing business. The
 problem is operational: ~$343K per year in avoidable deductions, spread
 almost evenly across eight categories — six of them between $49K and $54K
 each, so no single fix exists — that nobody classifies or verifies before
-the filing window closes. All-in trade cost including waste is 10.3% of
+the filing window closes. All-in trade cost including waste is 10.9% of
 revenue; the 1.1-point delta above the structural rate is where the
 recoverable money lives.
 
 > **Scope note (2026-07-30).** This diagnostic derives its figures live from the
-> retailer dataset: 9.2% structural / 10.3% all-in / ~$343K waste on
+> retailer dataset: 9.8% structural / 10.9% all-in / ~$343K waste on
 > $32,323,139.62 trailing-52-week scan revenue. The portfolio-level canonical
 > (`CINDERHAVEN_CANONICAL.md` § Trade Economics) publishes 9.83% structural /
-> 11.00% all-in / ~$380K waste on the same $32,323,139.62 denominator. The
-> ~0.6-0.7pp gap is methodology scope, not data drift: the workbook classifies
-> from the retailer deduction ledger and per-channel rate-card assignments,
-> while canonical measures the full allowance-plus-waste stack across all
+> 11.00% all-in / ~$380K waste on the same $32,323,139.62 denominator.
+> Structural trade matches canonical to the dollar ($3,177,051). The remaining
+> ~0.1pp all-in gap is waste scope, not data drift: the workbook sums the
+> retailer deduction ledger, while canonical measures waste across all
 > channels. Canonical is the governing figure for cross-repo claims;
-> reconciling the classification scopes is an explicitly deferred owner
-> decision.
+> reconciling the waste scopes is an explicitly deferred owner decision.
 
 ## What it does
 
