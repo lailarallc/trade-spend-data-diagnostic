@@ -75,8 +75,9 @@ third of the waste, and a promotion calendar that stops in November
 - Structural trade: **$3,177,051 (9.8%)** by the channel-average
   method; the workbook and the pure-SQL variant agree, and the
   derivation is documented in the diagnostic's `DEFENSIBILITY.md`
-- Operational waste (trailing 365 days, excluding promo billbacks):
-  **$343,281 across 4,772 events (1.1%)**; all-in trade **10.9%**
+- Operational waste — retailers, last 12 months (365 days, excluding promo
+  billbacks): **$343,281 across 4,772 events (1.1%)**; all-in trade on the
+  same basis **10.9%**. Canon's all-partner, 3-year figure is $379,559 (1.17%)
 - Waste categories: 8, six of them clustered between $48,861 and
   $53,664; the largest is 15.6% of the total
 - Promo billbacks with no matching calendar promotion: **521 /

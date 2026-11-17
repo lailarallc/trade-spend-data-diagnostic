@@ -167,11 +167,13 @@ def build_methodology(ws: Worksheet, db_path: Path) -> None:
         "Derived from sku_costs.trade_spend_pct columns multiplied by channel revenue. "
         "This is the planned cost of doing business with each retailer — it exists "
         f"whether or not a single deduction is ever taken. ${n['structural']:,.0f} ({n['structural_pct']:.1f}% of revenue).")
-    row = _write_pair(ws, row, "Bucket 2: Operational Waste",
-        "Trailing-365-day deductions excluding promo_billback. These are unplanned cash "
-        "outflows from compliance failures (label fines, pallet fines), logistics issues "
+    row = _write_pair(ws, row, "Bucket 2: Operational waste — retailers, last 12 months",
+        "Retailer deductions excluding promo_billback, over the 365 days to the last scan week. These are "
+        "unplanned cash outflows from compliance failures (label fines, pallet fines), logistics issues "
         "(short ships, late deliveries, damages), spoilage, pricing and labeling errors. "
-        f"${n['waste']:,.0f} ({n['waste_pct']:.1f}% of revenue).")
+        f"${n['waste']:,.0f} ({n['waste_pct']:.1f}% of revenue). Structural trade covers the 52 scan weeks, "
+        "364 days; the waste window is one day longer. All-in trade here is structural plus this retailer "
+        "figure, on the same retailers and the same last 12 months.")
     row += 1
     row = _write_pair(ws, row, "Why not three buckets?",
         "The original brief proposed a third \"promotional\" bucket using off-invoice discounts. "

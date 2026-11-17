@@ -41,8 +41,8 @@ year gets a yes with a one-week caveat, not a shrug.
 wholesale revenue. **The answer:** correct, and immaterial to the
 finding. Scan data is the only weekly, retailer-comparable series in
 the dataset, so it is the denominator for every rate in the
-diagnostic. The 9.8% structural rate and the 10.9% all-in rate are
-computed against the same base; the 1.1-point gap between them — the
+diagnostic. The 9.8% structural rate and the 10.9% all-in rate
+(retailers, last 12 months) are computed against the same base; the 1.1-point gap between them — the
 finding — survives any consistent choice of denominator.
 
 ## Structural trade: $3,177,051 (9.8%), computed two ways

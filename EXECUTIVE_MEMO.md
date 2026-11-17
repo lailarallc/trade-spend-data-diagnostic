@@ -9,8 +9,9 @@
 Structural trade — the negotiated rate card — cost $3,177,051 on
 $32,323,139.62 of trailing-52-week scan revenue (2025-01-04 to 2025-12-27): 9.8%. That number is
 known, budgeted, and visible to everyone who signed the contracts.
-All-in trade cost is 10.9%. The 1.1-point gap between the two is
-$343,281 a year in operational waste: 4,772 deduction line items,
+For the same retailers over the same last 12 months, all-in trade cost
+is 10.9%. The 1.1-point gap between the two is $343,281 of retailer
+operational waste: 4,772 deduction line items,
 spread across eight categories, that appeared in no budget and no
 report until the infrastructure to measure them was built.
 

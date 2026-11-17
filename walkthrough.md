@@ -2,9 +2,10 @@
 
 Cinderhaven Provisions, a specialty food company with $32.3 million
 in trailing-52-week scan revenue (CY2025), carries a structural trade rate
-of 9.8% (~$3.2M). All-in trade cost including operational
-deductions is 10.9%. The rate card is not the problem. The
-1.1-point gap above it is: $343K per year in operational waste
+of 9.83% ($3,177,051). For the same retailers over the last 12 months,
+all-in trade cost including operational deductions is 10.9%. The rate
+card is not the problem. The 1.1-point gap above it is: $343K of
+retailer operational waste over the last 12 months
 buried inside the deductions — spoilage and damage claims, pricing
 errors, pallet and label fines, short-ship charges — spread so
 evenly across eight categories that six of them land within $4,800
@@ -123,9 +124,10 @@ diagnostic-level engagement.
 
 Cinderhaven's structural trade rate is 9.8% of trailing-52-week
 retailer scan revenue ($32,323,139.62, CY2025 — verified against
-production 2026-07-29) — ~$3.2M in planned trade. The all-in trade
-cost, including operational deductions, is 10.9% ($3.52M). The
-operational waste layer is $343K trailing-365-day, representing
+production 2026-07-29) — $3,177,051 in planned trade. For the same
+retailers over the last 12 months, the all-in trade cost, including
+operational deductions, is 10.9% ($3.52M). The retailer operational
+waste layer is $343K over the last 12 months, representing
 1.1% of scan revenue — the 1.1-point gap between the structural
 rate and the all-in rate (see Tab 1: Executive Pulse).
 

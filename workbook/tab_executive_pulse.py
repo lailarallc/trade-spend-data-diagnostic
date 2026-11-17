@@ -147,9 +147,9 @@ def build_executive_pulse(ws: Worksheet, db_path: Path) -> None:
 
     # --- KPI trio (rows 5-7) ---
     kpis = [
-        ("All-In Trade Rate", all_in_rate),
+        ("All-in trade — retailers, last 12 months", all_in_rate),
         ("Planned Trade Rate", structural_rate),
-        ("Operational Waste", waste_rate),
+        ("Operational waste — retailers, last 12 months", waste_rate),
     ]
     for col_idx, (label, value) in enumerate(kpis, 2):
         cell_val = ws.cell(row=5, column=col_idx, value=value)
@@ -166,7 +166,7 @@ def build_executive_pulse(ws: Worksheet, db_path: Path) -> None:
     top_share = (max(amounts) / waste) if (amounts and waste) else 0
     ws["B7"] = (
         f"Structural trade rate ({structural_rate:.1%}) is the rate card working as designed. "
-        f"~${waste:,.0f} in operational waste is buried in the deductions"
+        f"~${waste:,.0f} in retailer operational waste over the last 12 months is buried in the deductions"
         f" — spread across categories, the largest just {top_share:.0%} of the total. "
         f"A process problem, not a single leak."
     )
@@ -187,7 +187,7 @@ def build_executive_pulse(ws: Worksheet, db_path: Path) -> None:
     waterfall_data = [
         ("Revenue", 0, revenue),
         ("Structural Trade", net_after + waste, structural),
-        ("Operational Waste", net_after, waste),
+        ("Operational waste — retailers, last 12 months", net_after, waste),
         ("Net After Trade", 0, net_after),
     ]
     for i, (cat, base, val) in enumerate(waterfall_data):
@@ -203,7 +203,7 @@ def build_executive_pulse(ws: Worksheet, db_path: Path) -> None:
     waterfall_visible = [
         ("Revenue", f"=D{chart_start + 1}", CHICAGO_20),
         ("Structural Trade", f"=D{chart_start + 2}", SINGAPORE_55),
-        ("Operational Waste", f"=D{chart_start + 3}", TOKYO_40),
+        ("Operational waste — retailers, last 12 months", f"=D{chart_start + 3}", TOKYO_40),
         ("Net After Trade", f"=D{chart_start + 4}", HK_35),
     ]
     for i, (label, formula, color) in enumerate(waterfall_visible):
@@ -236,7 +236,7 @@ def build_executive_pulse(ws: Worksheet, db_path: Path) -> None:
         cell.alignment = ALIGN_CENTER
 
     improvement_rows = [
-        ("Operational waste (trailing 365d)", waste, NUM_FMT_DOLLAR),
+        ("Operational waste — retailers, last 12 months", waste, NUM_FMT_DOLLAR),
         ("Current recovery rate", recovery_rate, NUM_FMT_PCT),
         ("Currently recovered", total_recovered, NUM_FMT_DOLLAR),
         ("At 30% recovery", waste * 0.30, NUM_FMT_DOLLAR),
